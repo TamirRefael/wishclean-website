@@ -74,6 +74,7 @@ a{color:inherit; text-decoration:none}
   border:1px solid rgba(255,255,255,0.26);
   background: rgba(255,255,255,0.14);
   transition: transform .12s ease, background .12s ease, border-color .12s ease;
+  cursor: pointer;
 }
 .social__btn:hover{transform: translateY(-1px); background: rgba(255,255,255,0.22)}
 .social__btn svg{width:18px; height:18px; fill:#fff}
@@ -263,15 +264,42 @@ h1{margin:14px 0 10px; font-size:42px; line-height:1.05}
   grid-template-columns: repeat(4, 1fr);
   gap:12px;
 }
+
 .iconCard{
   background: var(--white);
   border:1px solid var(--line);
   border-radius:18px;
   padding:16px;
   box-shadow: 0 8px 26px rgba(0,0,0,0.06);
+
+  display:grid;
+  grid-template-columns: 1fr auto;         /* כותרת ואז אייקון (RTL: האייקון משמאל לכותרת) */
+  grid-template-areas:
+    "title icon"
+    "text  text";
+  align-items:center;
+  column-gap:8px;
+  row-gap:6px;
 }
-.icon{font-size:22px}
-.iconCard h3{margin:10px 0 6px; color:var(--text)}
+
+.icon{
+  font-size:22px;
+  grid-area: icon;
+}
+
+.iconCard h3{
+  margin:0;
+  color:var(--text);
+  grid-area: title;
+}
+
+.iconCard p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.7;
+  grid-area: text;
+}
+
 .iconCard p{margin:0; color:var(--muted); line-height:1.7}
 
 /* Steps / Video */
@@ -291,6 +319,15 @@ h1{margin:14px 0 10px; font-size:42px; line-height:1.05}
   border:1px solid rgba(111,127,78,0.26);
   font-weight:900;
   color: var(--text);
+}
+
+.step h3{
+  margin: 0;
+  line-height: 1.2;
+}
+
+.step p{
+  margin: 6px 0 0;
 }
 
 .videoBox{margin-top:18px; display:grid; grid-template-columns: 1fr 1fr; gap:12px}

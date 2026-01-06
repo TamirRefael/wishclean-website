@@ -393,4 +393,32 @@ if (mailBtn) {
   el.addEventListener("change", () => refreshQuickLinks(currentLang));
 });
 
+// Share button
+const shareBtn = document.getElementById('shareBtn');
+
+if (shareBtn) {
+  shareBtn.addEventListener('click', async () => {
+    const shareData = {
+      title: document.title,
+      text: 'Wishclean – ניקוי ריפודים מקצועי',
+      url: window.location.href
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        // המשתמש ביטל – לא עושים כלום
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        alert('הקישור הועתק ללוח 📋');
+      } catch (err) {
+        alert('לא ניתן להעתיק את הקישור');
+      }
+    }
+  });
+}
+
 refreshQuickLinks(currentLang);
