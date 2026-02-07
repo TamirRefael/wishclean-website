@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wishclean.netlify.app/sitemap.xml
+Sitemap: https://wishclean.co.il/sitemap.xml
