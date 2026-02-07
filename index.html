@@ -191,7 +191,17 @@
           <div class="contactRight">
             <div class="card"><h3 class="formTitle" data-i18n="form_title">מלאו פרטים</h3>
               <form class="quote" id="quoteForm"><div class="quote__grid">
-                <div class="field"><label for="qType" data-i18n="q_type">סוג רהיט</label><select id="qType" name="type"><option value="">בחר/י…</option><option value="ספה">ספה</option></select></div>
+                <div class="field">
+  <label for="qType" data-i18n="q_type">סוג רהיט</label>
+  <select id="qType" name="type">
+    <option value="" data-i18n="q_pick">בחר/י…</option>
+    <option value="ספה" data-i18n="q_t1">ספה</option>
+    <option value="כורסה" data-i18n="q_t2">כורסה</option>
+    <option value="מזרן/מיטה" data-i18n="q_t3">מזרן/מיטה</option>
+    <option value="רהיט עור" data-i18n="q_t4">רהיט עור</option>
+    <option value="אחר" data-i18n="q_t5">אחר</option>
+  </select>
+</div>
                 <div class="field"><label for="qCity" data-i18n="q_city">עיר</label><input id="qCity" name="city" type="text" placeholder="אשדוד" /></div>
                 <div class="field"><label for="qName" data-i18n="q_name">שם</label><input id="qName" name="name" type="text" placeholder="שם פרטי" /></div>
                 <div class="field"><label for="qPhone" data-i18n="q_phone">טלפון</label><input id="qPhone" name="phone" type="tel" placeholder="05x-xxxxxxx" /></div>
