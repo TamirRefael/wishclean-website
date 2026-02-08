@@ -332,12 +332,16 @@ h1{margin:14px 0 10px; font-size:42px; line-height:1.05}
 
 .videoBox{margin-top:18px; display:grid; grid-template-columns: 1fr 1fr; gap:12px}
 .videoBox__right{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+
+/* שיפור לוידאו: aspect-ratio למניעת CLS */
 .video{
   width:100%;
-  height:220px;
+  aspect-ratio: 9 / 16; /* משריין מקום לוידאו אנכי */
+  height: auto;
   border-radius:18px;
   border:1px solid rgba(46,46,46,0.14);
   background: rgba(0,0,0,0.06);
+  object-fit: cover;
 }
 
 /* ✅ Gallery – NO CROP, better quality */
@@ -365,7 +369,7 @@ h1{margin:14px 0 10px; font-size:42px; line-height:1.05}
 .mediaFrame img{
   width:100%;
   height:100%;
-  object-fit: contain;         /* ✅ no cropping */
+  object-fit: contain;           /* ✅ no cropping */
   image-rendering: auto;
   display:block;
 }
@@ -561,8 +565,8 @@ html, body {
     flex-wrap: wrap;
     overflow: visible;
     gap: 10px;
-  :root{ --anchorOffset: 130px; }
   }
+  :root{ --anchorOffset: 130px; }
 
   .header__actions {
     flex-wrap: wrap;
@@ -589,4 +593,3 @@ html{
 [id]{
   scroll-margin-top: var(--anchorOffset);
 }
-
