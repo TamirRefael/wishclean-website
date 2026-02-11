@@ -7,6 +7,18 @@ const BUSINESS = {
   facebookUrl: "https://www.facebook.com/share/1CG6tPFFZq/?mibextid=wwXIfr",
 };
 
+// פונקציית עזר למעקב אחרי המרות של גוגל
+function trackWhatsAppConversion(location) {
+  if (typeof gtag === 'function') {
+    gtag('event', 'generate_lead', {
+      'event_category': 'Contact',
+      'event_label': 'WhatsApp ' + location,
+      'transport_type': 'beacon'
+    });
+    console.log('Conversion tracked: WhatsApp ' + location);
+  }
+}
+
 function sanitizePhoneDigits(e164) {
   return (e164 || "").replace(/[^\d]/g, "");
 }
@@ -56,7 +68,6 @@ function mailtoLink(lang, data) {
 /* -------------------- i18n -------------------- */
 const I18N = {
   he: {
-    /* ... (השארתי את כל המלל בעברית בדיוק כפי שהיה) ... */
     skip: "דלג לתוכן", tagline: "ניקוי ריפודים מקצועי", nav_services: "שירותים", nav_process: "איך זה עובד", nav_gallery: "גלריה", nav_contact: "צור קשר", call: "התקשר",
     pill: "שירות עד הבית • בטוח לילדים וחיות מחמד • תוצאה עמוקה", h1: "ניקוי ריפודים מקצועי לרהיטים", lead: "טיפול יסודי בכתמים והסרת ריחות — תוצאה נקייה ובטוחה לבית שלכם!",
     cta_wa: "קבל הצעת מחיר בוואטסאפ", cta_email: "שלח בקשה במייל", mini1_t: "זמינות מהירה", mini1_s: "ניקוי בבית או במשרד", mini2_t: "ציוד מתקדם", mini2_s: "התאמה לסוג הבד/עור", mini3_t: "אחריות מלאה", mini3_s: "שמירה על שלמות הריפוד",
@@ -96,7 +107,7 @@ const I18N = {
     b1: "Удобно", b2: "Безопасно", b3: "Эффективно", b4: "Гарантия", note_photos: "Совет: одно фото мебели помогает точнее оценить стоимость.",
     services_title: "Что мы делаем", services_sub: "Чистка под тип обивки — ткань и кожа.", s1_t: "Чистка тканевых диванов", s1_p: "Глубокая чистка: пятна, грязь ומחסלי ריחות.", s2_t: "Чистка кожаной мебели", s2_p: "Деликатно: сохраняем цвет ומראה.", s3_t: "У клиента", s3_p: "Без разборки и перевозки — дома или в офисе.",
     f1_t: "Удобно", f1_p: "У клиента — без перевозки. Быстро и комфортно.", f2_t: "Безопасно", f2_p: "Средства безопасны для людей, детей и животных.", f3_t: "Эффективно", f3_p: "Глубокий результат: пятна, запахи, грязь.", f4_t: "Гарантия", f4_p: "Бережно к ткани/коже — заметный результат.",
-    p_title: "Как мы чистим диваны?", p_text: "Мы подбираем метод под тип ткани. Чистим не только поверхность — но ומקומות נסתרים.",
+    p_title: "Как we чистим диваны?", p_text: "Мы подбираем метод под тип ткани. Чистим не только поверхность — но ומקומות נסתרים.",
     st1_t: "Диагностика", st1_p: "Тип обивки ומלצה על שיטה מתאימה.", st2_t: "Пятна и запахи", st2_p: "Проф. средства, безопасные для дома.", st3_t: "Глубокая чистка", st3_p: "Вся мебель + труднодоступные места.", st4_t: "Финиш и проверка", st4_p: "Проверка результата ומלצות ייבוש.",
     v_title: "Видео", v_text: "Здесь можно посмотреть процесс и результаты.", v_btn: "Связаться сейчас",
     g_title: "Галерея работ", g_sub: "До / после — реальные примеры.",
@@ -107,7 +118,7 @@ const I18N = {
     form_title: "Заполните данные", q_type: "Тип мебели", q_pick: "Выберите…", q_t1: "Диван", q_t2: "Кресло", q_t3: "Матрас", q_t4: "Кожа", q_t5: "Другое",
     q_city: "Город", q_city_ph: "Ashdod", q_name: "Имя", q_name_ph: "Имя", q_phone: "Телефон", q_phone_ph: "+972...",
     q_notes: "Комментарий", q_notes_ph: "пятно вина + запах", q_send_wa: "В WhatsApp", q_send_email: "На Email", q_reset: "Очистить",
-    q_hint: "В WhatsApp можно прикрепить фото/видео через 📎.", f_services: "Услуги", f_gallery: "Галерея", f_contact: "Контакты",
+    q_hint: "В WhatsApp можно прикрепить фото/видеו через 📎.", f_services: "Услуги", f_gallery: "Галерея", f_contact: "Контакты",
   },
 };
 
@@ -164,7 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
     applyLang(currentLang);
   });
 
+  // הוספת מעקב המרה לכפתור הוואטסאפ הראשי (Top CTA)
+  document.getElementById("whatsappQuoteBtn")?.addEventListener("click", () => {
+    trackWhatsAppConversion('Top Button');
+  });
+
+  // הוספת מעקב המרה לכפתור השליחה מהטופס
   document.getElementById("sendWaFromForm")?.addEventListener("click", () => {
+    trackWhatsAppConversion('Form');
     window.open(whatsappLink(currentLang, getFormData()), "_blank", "noopener,noreferrer");
   });
 
